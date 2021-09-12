@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,13 +23,13 @@ import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.moviecomposeui.core.component.RenderImage
 import com.example.moviecomposeui.core.navigation.Screen
 import com.example.moviecomposeui.core.util.Constants.BASE_POSTER_URL
 import com.example.moviecomposeui.core.util.ErrorItem
 import com.example.moviecomposeui.core.util.LoadingItem
 import com.example.moviecomposeui.core.util.LoadingView
-import com.example.moviecomposeui.core.component.RenderImage
-import com.example.moviecomposeui.feature.movieList.entity.MovieResult
+import com.example.moviecomposeui.feature.movieList.entity.MovieView
 import com.example.moviecomposeui.ui.theme.SurfaceColor
 import kotlinx.coroutines.flow.Flow
 
@@ -65,7 +67,7 @@ fun MainScreen(navController: NavHostController) {
 
 }
 @Composable
-fun TopRatedMovie(movies: Flow<PagingData<MovieResult>>,navController: NavHostController){
+fun TopRatedMovie(movies: Flow<PagingData<MovieView>>,navController: NavHostController){
     val lazyMovieItems = movies.collectAsLazyPagingItems()
     LazyRow{
         items(lazyMovieItems.itemCount){index ->
@@ -80,7 +82,7 @@ fun TopRatedMovie(movies: Flow<PagingData<MovieResult>>,navController: NavHostCo
 
 @ExperimentalFoundationApi
 @Composable
-fun MovieScreen(movies: Flow<PagingData<MovieResult>>,navController: NavHostController){
+fun MovieScreen(movies: Flow<PagingData<MovieView>>, navController: NavHostController){
 
     val lazyMovieItems = movies.collectAsLazyPagingItems()
 
@@ -136,7 +138,7 @@ fun MovieScreen(movies: Flow<PagingData<MovieResult>>,navController: NavHostCont
 }
 
 @Composable
-fun MovieItem(movie: MovieResult, navController: NavHostController, modifier : Modifier = Modifier) {
+fun MovieItem(movie: MovieView, navController: NavHostController, modifier : Modifier = Modifier) {
 
 
     Column(

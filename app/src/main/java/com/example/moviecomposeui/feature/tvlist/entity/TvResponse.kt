@@ -1,15 +1,12 @@
 package com.example.moviecomposeui.feature.tvlist.entity
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
 data class TvResponse(
     val page: Int,
     val results: List<TvResult>,
     val total_pages: Int,
     val total_results: Int
 )
-@Parcelize
+
 data class TvResult(
     val backdrop_path: String,
     val first_air_date: String,
@@ -24,4 +21,11 @@ data class TvResult(
     val poster_path: String,
     val vote_average: Double,
     val vote_count: Int
-) : Parcelable
+)
+
+fun TvResult.toTvViews() = TvView(
+    id = id,
+    name = name,
+    overview = overview,
+    poster_path = poster_path
+)

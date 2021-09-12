@@ -1,10 +1,9 @@
 package com.example.moviecomposeui.feature.movieList
 
-import javax.inject.Inject
+import com.example.moviecomposeui.feature.movieList.entity.MovieResponse
 
-class MovieRepository
-@Inject constructor(private val movieService: MovieService) {
-    suspend fun getDiscoveredMovie(pageNumber: Int) = movieService.getMovieList(pageNumber = pageNumber)
+interface MovieRepository {
+    suspend fun getDiscoveredMovie(pageNumber: Int) : MovieResponse
 
-    suspend fun getTopRatedList(pageNumber: Int) = movieService.getTopRatedList(pageNumber = pageNumber)
+    suspend fun getTopRatedList(pageNumber: Int) : MovieResponse
 }

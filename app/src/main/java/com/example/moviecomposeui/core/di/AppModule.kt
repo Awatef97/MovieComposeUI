@@ -2,6 +2,15 @@ package com.example.moviecomposeui.core.di
 
 import com.example.moviecomposeui.BuildConfig
 import com.example.moviecomposeui.core.util.Constants
+import com.example.moviecomposeui.feature.movieList.MovieRepository
+import com.example.moviecomposeui.feature.movieList.MovieRepositoryImp
+import com.example.moviecomposeui.feature.movieList.MovieService
+import com.example.moviecomposeui.feature.movievideos.VideosRepository
+import com.example.moviecomposeui.feature.movievideos.VideosRepositoryImp
+import com.example.moviecomposeui.feature.movievideos.VideosService
+import com.example.moviecomposeui.feature.tvlist.TvRepository
+import com.example.moviecomposeui.feature.tvlist.TvRepositoryImp
+import com.example.moviecomposeui.feature.tvlist.TvService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,5 +45,18 @@ class AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideMovieRepository(movieService: MovieService): MovieRepository = MovieRepositoryImp(movieService)
+
+    @Provides
+    @Singleton
+    fun provideTvRepository(tvService: TvService): TvRepository = TvRepositoryImp(tvService)
+
+    @Provides
+    @Singleton
+    fun provideVideoRepository(videosService: VideosService): VideosRepository = VideosRepositoryImp(videosService)
+
 
 }

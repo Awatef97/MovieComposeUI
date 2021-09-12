@@ -4,7 +4,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviecomposeui.feature.moviereviews.entity.ReviewsResult
+import com.example.moviecomposeui.feature.moviereviews.entity.ReviewsView
+import com.example.moviecomposeui.feature.moviereviews.entity.toReviewsView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class ReviewsViewModel
     @Inject constructor(private val repository: ReviewsRepository):ViewModel()
 {
-    val reviews: MutableState<List<ReviewsResult>> = mutableStateOf(emptyList())
+    val reviews: MutableState<List<ReviewsView>> = mutableStateOf(emptyList())
 
     fun getReviews( movieId: Int){
         viewModelScope.launch {
@@ -23,7 +24,7 @@ class ReviewsViewModel
                 val result = repository.getReviews(
                     movieId = movieId
                 )
-                reviews.value = result.results
+                reviews.value = result.results.map { it.toReviewsView() }
             }
         }
 

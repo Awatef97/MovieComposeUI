@@ -1,9 +1,8 @@
 package com.example.moviecomposeui.feature.movievideos
 
-import javax.inject.Inject
+import com.example.moviecomposeui.feature.movievideos.entity.VideosResponse
 
-class VideosRepository
-@Inject constructor(private val videoService: VideosService)
-{
-    suspend fun getVideos(movieId: Int) = videoService.getVideosList(movieId)
+interface VideosRepository {
+    suspend fun getVideos(movieId: Int) : VideosResponse
+
 }

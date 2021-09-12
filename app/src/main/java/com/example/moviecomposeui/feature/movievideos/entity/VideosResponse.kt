@@ -14,3 +14,6 @@ data class VideosResult(
     val site: String,
     val type: String
 )
+fun VideosResult.toVideoView() = VideoView(
+    key = key
+)

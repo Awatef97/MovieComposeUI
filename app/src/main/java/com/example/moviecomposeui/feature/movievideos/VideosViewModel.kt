@@ -4,7 +4,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviecomposeui.feature.movievideos.entity.VideosResult
+import com.example.moviecomposeui.feature.movievideos.entity.VideoView
+import com.example.moviecomposeui.feature.movievideos.entity.toVideoView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,18 +14,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VideosViewModel
-    @Inject constructor(private val videosRepository: VideosRepository): ViewModel()
+    @Inject constructor(private val videosRepositoryImp: VideosRepositoryImp): ViewModel()
 {
 
-    val videos: MutableState<List<VideosResult>> = mutableStateOf(emptyList())
+    val videos: MutableState<List<VideoView>> = mutableStateOf(emptyList())
 
     fun getVideos( movieId: Int){
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                val result = videosRepository.getVideos(
+                val result = videosRepositoryImp.getVideos(
                     movieId = movieId
                 )
-                videos.value = result.results
+                videos.value = result.results.map { it.toVideoView() }
             }
         }
 

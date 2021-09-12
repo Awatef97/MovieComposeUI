@@ -1,6 +1,4 @@
 package com.example.moviecomposeui.feature.movieList.entity
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 
 data class MovieResponse(
     val page: Int,
@@ -8,7 +6,7 @@ data class MovieResponse(
     val total_pages: Int,
     val total_results: Int
 )
-@Parcelize
+
 data class MovieResult(
     val adult: Boolean,
     val backdrop_path: String,
@@ -24,4 +22,11 @@ data class MovieResult(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int
-) : Parcelable
+)
+
+    fun MovieResult.toMovieView() = MovieView(
+        id = id,
+        overview = overview,
+        title = title,
+        poster_path = poster_path
+    )

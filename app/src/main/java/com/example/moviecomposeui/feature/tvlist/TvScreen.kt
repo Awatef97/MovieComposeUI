@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +25,7 @@ import coil.compose.rememberImagePainter
 import coil.transform.RoundedCornersTransformation
 import com.example.moviecomposeui.R
 import com.example.moviecomposeui.core.util.Constants.BASE_POSTER_URL
-import com.example.moviecomposeui.feature.tvlist.entity.TvResult
+import com.example.moviecomposeui.feature.tvlist.entity.TvView
 import com.example.moviecomposeui.ui.theme.SurfaceColor
 import kotlinx.coroutines.flow.Flow
 
@@ -59,7 +61,7 @@ fun TvScreen(mainViewModel: TvViewModel = hiltViewModel()) {
     }
 }
 @Composable
-fun TopRatedMovie(movies: Flow<PagingData<TvResult>>){
+fun TopRatedMovie(movies: Flow<PagingData<TvView>>){
     val lazyMovieItems = movies.collectAsLazyPagingItems()
     LazyRow{
         items(lazyMovieItems.itemCount){index ->
@@ -77,7 +79,7 @@ fun TopRatedMovie(movies: Flow<PagingData<TvResult>>){
 
 @ExperimentalFoundationApi
 @Composable
-fun MovieScreen(movies: Flow<PagingData<TvResult>>){
+fun MovieScreen(movies: Flow<PagingData<TvView>>){
 
     val lazyMovieItems = movies.collectAsLazyPagingItems()
 
@@ -99,7 +101,7 @@ fun MovieScreen(movies: Flow<PagingData<TvResult>>){
 }
 
 @Composable
-fun MovieItem(movie: TvResult) {
+fun MovieItem(movie: TvView) {
 
     
     Column(
